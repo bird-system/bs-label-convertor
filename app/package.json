@@ -1,15 +1,25 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "electron-react-boilerplate",
+  "name": "birdsystem-label-convertor",
+  "productName": "birdsystem-label-convertor",
   "version": "1.0.0",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "description": "A label convertor for BirdSystem internal use",
   "main": "./main.js",
   "author": {
-    "name": "C. T. Lin",
-    "email": "chentsulin@gmail.com",
-    "url": "https://github.com/chentsulin"
+    "name": "Allan Sun",
+    "email": "allan.sun@bricre.com",
+    "url": "https://github.com/allansun"
   },
   "license": "MIT",
   "dependencies": {
+    "antd": "^2.7.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "xlsx": "^0.8.6",
+    "csv-parse": "^1.2.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "electron": "^1.4.15",
+    "babel-register": "^6.22.0"
   }
 }

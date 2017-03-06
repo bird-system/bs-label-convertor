@@ -34,7 +34,12 @@ export default validate({
     packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
   },
 
-  plugins: [],
+  plugins: [
+  ],
 
-  externals: Object.keys(externals || {})
+  externals: Object.keys(externals || {}),
+
+  node: {
+    __dirname: false
+  }
 });

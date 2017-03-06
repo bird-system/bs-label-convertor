@@ -1,5 +1,7 @@
 import { app, BrowserWindow, Menu, shell } from 'electron';
 
+const path = require('path');
+
 let menu;
 let template;
 let mainWindow = null;
@@ -47,7 +49,8 @@ app.on('ready', async () => {
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
-    height: 728
+    height: 728,
+    icon: path.resolve(__dirname, 'app.icns')
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);

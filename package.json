@@ -1,6 +1,6 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "ElectronReact",
+  "name": "birdsystem-label-convertor",
+  "productName": "BS Label Convertor",
   "version": "0.10.0",
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
   "main": "main.js",
@@ -29,31 +29,30 @@
   },
   "browserslist": "electron 1.4",
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.develar.ElectronReact",
+    "productName": "BS Label Convertor",
+    "appId": "org.bricre.BSLabelConvertor",
     "category": "public.app-category.tools",
     "dmg": {
-      "contents": [
-        {
-          "x": 410,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        },
-        {
-          "x": 130,
-          "y": 150,
-          "type": "file"
-        }
-      ]
+      "contents": [{
+        "x": 410,
+        "y": 150,
+        "type": "link",
+        "path": "/Applications"
+      }, {
+        "x": 130,
+        "y": 150,
+        "type": "file"
+      }]
     },
     "files": [
       "dist/",
       "node_modules/",
+      "templates/",
       "app.html",
       "main.js",
       "main.js.map",
-      "package.json"
+      "package.json",
+      "JsBarcode.all.min.js"
     ],
     "win": {
       "target": "nsis"
@@ -63,27 +62,27 @@
         "deb",
         "AppImage"
       ]
+    },
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
     }
-  },
-  "directories": {
-    "buildResources": "resources",
-    "output": "release"
   },
   "bin": {
     "electron": "./node_modules/.bin/electron"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chentsulin/electron-react-boilerplate.git"
+    "url": "git+https://github.com/bird-ystem/bs-label-convertor.git"
   },
   "author": {
-    "name": "C. T. Lin",
+    "name": "Allan Sun",
     "email": "chentsulin@gmail.com",
-    "url": "https://github.com/chentsulin"
+    "url": "https://github.com/allansun"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chentsulin/electron-react-boilerplate/issues"
+    "url": "https://github.com/bird-ystem/bs-label-convertor/issues"
   },
   "keywords": [
     "electron",
@@ -94,7 +93,7 @@
     "webpack",
     "react-hot"
   ],
-  "homepage": "https://github.com/chentsulin/electron-react-boilerplate#readme",
+  "homepage": "https://github.com/bird-ystem/bs-label-convertor",
   "devDependencies": {
     "asar": "^0.13.0",
     "babel-core": "^6.22.1",
@@ -123,6 +122,7 @@
     "electron": "^1.4.15",
     "electron-builder": "^13.3.2",
     "electron-devtools-installer": "^2.0.1",
+    "electron-packager": "^8.5.2",
     "enzyme": "^2.7.1",
     "eslint": "^3.14.0",
     "eslint-config-airbnb": "^14.0.0",
