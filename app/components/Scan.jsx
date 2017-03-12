@@ -12,6 +12,13 @@ import Parser from '../lib/Parser/CSV';
 import styles from './Scan.css';
 
 let data = [];
+const win = new Electron.remote.BrowserWindow({
+  show: false,
+  webPreferences: {
+    javascript: true,
+    devTools: false
+  }
+});
 
 export default class Scan extends Component {
   constructor(props) {
@@ -26,13 +33,8 @@ export default class Scan extends Component {
   }
 
   open = () => {
-    let file = Electron.remote.dialog.showOpenDialog({
-      properties: ['openFile'],
-      filters: {
-        name: 'Files',
-        extensions: ['csv', 'xslx']
-      }
-    });
+    console.log(Electron.remote.dialog);
+    let file = Electron.remote.dialog.showOpenDialog();
 
     if (file) {
       file = file[0];
@@ -60,13 +62,6 @@ export default class Scan extends Component {
     const tempPath = Electron.remote.app.getPath('temp');
     const tempFilePath = path.join(tempPath, '/label-print.html');
     const tempFileLocation = `file://${tempFilePath}`;
-    const win = new Electron.remote.BrowserWindow({
-      show: false,
-      webPreferences: {
-        javascript: true,
-        devTools: false
-      }
-    });
     const html = [];
 
     for (let i = 0; i < record.quantity; i += 1) {
