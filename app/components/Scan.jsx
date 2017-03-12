@@ -12,13 +12,7 @@ import Parser from '../lib/Parser/CSV';
 import styles from './Scan.css';
 
 let data = [];
-const win = new Electron.remote.BrowserWindow({
-  show: false,
-  webPreferences: {
-    javascript: true,
-    devTools: false
-  }
-});
+let win;
 
 export default class Scan extends Component {
   constructor(props) {
@@ -33,7 +27,6 @@ export default class Scan extends Component {
   }
 
   open = () => {
-    console.log(Electron.remote.dialog);
     let file = Electron.remote.dialog.showOpenDialog();
 
     if (file) {
@@ -55,14 +48,29 @@ export default class Scan extends Component {
     });
   }
 
+  createPrintWindow = () => new Electron.remote.BrowserWindow({
+    show: false,
+    webPreferences: {
+      javascript: true,
+      devTools: false
+    }
+  });
+
   print = (record) => {
     console.log(record);
+    console.log(win);
 
     const compiled = _.template(fs.readFileSync(path.join(__dirname, '/templates/barcode.tmpl'), { encoding: 'utf8' }));
     const tempPath = Electron.remote.app.getPath('temp');
     const tempFilePath = path.join(tempPath, '/label-print.html');
     const tempFileLocation = `file://${tempFilePath}`;
     const html = [];
+
+    if (win !== undefined) {
+      console.log(win);
+      win.destroy();
+    }
+    win = this.createPrintWindow();
 
     for (let i = 0; i < record.quantity; i += 1) {
       html.push(`<div class="printBlock"><svg class="barcode"
