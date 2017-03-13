@@ -41,6 +41,10 @@ export default class Scan extends Component {
   }
 
   test = () => {
+    this.setState({
+      showPrintWindow: true,
+      directPrint: false
+    });
     this.print({
       inputSku: '123',
       outputSku: 'Test123',
@@ -52,7 +56,7 @@ export default class Scan extends Component {
     show: false,
     webPreferences: {
       javascript: true,
-      devTools: false
+      devTools: true
     }
   });
 
@@ -67,20 +71,18 @@ export default class Scan extends Component {
     const html = [];
 
     if (win !== undefined) {
-      console.log(win);
       win.destroy();
     }
     win = this.createPrintWindow();
 
-    for (let i = 0; i < record.quantity; i += 1) {
-      html.push(`<div class="printBlock"><svg class="barcode"
-        jsbarcode-format="CODE128"
-        jsbarcode-value="${record.outputSku}"
-        jsbarcode-textmargin="0"
-        jsbarcode-fontoptions="bold"
-        jsbarcode-fontSize="30"
-      ></svg></div>`);
-    }
+    html.push(`<div class="printBlock"><svg class="barcode"
+      jsbarcode-format="CODE128"
+      jsbarcode-value="${record.outputSku}"
+      jsbarcode-textmargin="0"
+      jsbarcode-fontoptions="bold"
+      jsbarcode-height="40"
+      jsbarcode-fontSize="30"
+    ></svg></div>`);
 
     fs.writeFileSync(
       path.join(tempPath, '/JsBarcode.all.min.js'),
@@ -94,6 +96,7 @@ export default class Scan extends Component {
     win.webContents.on('did-finish-load', () => {
       if (this.state.showPrintWindow) {
         win.show();
+        // win.webContents.openDevTools();
       }
       win.webContents.print({ silent: this.state.directPrint });
     });
@@ -141,10 +144,6 @@ export default class Scan extends Component {
       title: 'Output SKU',
       dataIndex: 'outputSku',
       key: 'outputSku'
-    }, {
-      title: 'Quantity',
-      dataIndex: 'quantity',
-      key: 'quantity'
     }, {
       title: 'Print',
       render: (text, record) => <Button onClick={() => this.print(record)}> &#128424; </Button>
