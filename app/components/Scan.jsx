@@ -80,8 +80,9 @@ export default class Scan extends Component {
       jsbarcode-value="${record.outputSku}"
       jsbarcode-textmargin="0"
       jsbarcode-fontoptions="bold"
+      jsbarcode-width="1"
       jsbarcode-height="40"
-      jsbarcode-fontSize="30"
+      jsbarcode-fontSize="20"
     ></svg></div>`);
 
     fs.writeFileSync(
