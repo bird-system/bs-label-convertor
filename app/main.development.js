@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
+  app.quit();
 });
 
 
@@ -214,13 +214,10 @@ app.on('ready', async () => {
     template = [{
       label: '&File',
       submenu: [{
-        label: '&Open',
-        accelerator: 'Ctrl+O'
-      }, {
-        label: '&Close',
-        accelerator: 'Ctrl+W',
+        label: '&Quit',
+        accelerator: 'Ctrl+Q',
         click() {
-          mainWindow.close();
+          app.quit();
         }
       }]
     }, {
