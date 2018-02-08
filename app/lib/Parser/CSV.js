@@ -5,7 +5,7 @@ export default class Parser extends AbstractParser {
   parseCSV() {
     return parse(this.fileContent, {
       delimiter: ',',
-      columns: ['inputSku', 'outputSku']
+      columns: ['inputSku', 'outputSku','additionalOutput']
     });
   }
 }

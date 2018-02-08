@@ -64,7 +64,7 @@ export default class Scan extends Component {
     console.log(record);
     console.log(win);
 
-    const compiled = _.template(fs.readFileSync(path.join(__dirname, '/templates/barcode.tmpl'), { encoding: 'utf8' }));
+    const compiled = _.template(fs.readFileSync(path.join(__dirname, '/templates/barcode.html'), { encoding: 'utf8' }));
     const tempPath = Electron.remote.app.getPath('temp');
     const tempFilePath = path.join(tempPath, '/label-print.html');
     const tempFileLocation = `file://${tempFilePath}`;
@@ -82,8 +82,10 @@ export default class Scan extends Component {
       jsbarcode-fontoptions="bold"
       jsbarcode-width="1"
       jsbarcode-height="40"
-      jsbarcode-fontSize="20"
-    ></svg></div>`);
+      jsbarcode-fontSize="16"
+    ></svg>
+      ${record.additionalOutput}
+    </div>`);
 
     fs.writeFileSync(
       path.join(tempPath, '/JsBarcode.all.min.js'),
@@ -145,6 +147,10 @@ export default class Scan extends Component {
       title: 'Output SKU',
       dataIndex: 'outputSku',
       key: 'outputSku'
+    },{
+      title: 'Additional content',
+      dataIndex: 'additionalOutput',
+      key: 'additionalOutput'
     }, {
       title: 'Print',
       render: (text, record) => <Button onClick={() => this.print(record)}> &#128424; </Button>
