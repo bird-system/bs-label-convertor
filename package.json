@@ -32,15 +32,17 @@
   },
   "browserslist": "electron 1.6",
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.develar.ElectronReact",
+    "productName": "BS Label Convertor",
+    "appId": "org.bricre.BSLabelConvertor",
     "files": [
       "dist/",
       "node_modules/",
+      "templates/",
       "app.html",
       "main.prod.js",
       "main.prod.js.map",
-      "package.json"
+      "package.json",
+      "JsBarcode.all.min.js"
     ],
     "dmg": {
       "contents": [
@@ -78,13 +80,13 @@
     "url": "git+https://github.com/chentsulin/electron-react-boilerplate.git"
   },
   "author": {
-    "name": "C. T. Lin",
+    "name": "Allan Sun",
     "email": "chentsulin@gmail.com",
     "url": "https://github.com/chentsulin"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chentsulin/electron-react-boilerplate/issues"
+    "url": "https://github.com/bird-ystem/bs-label-convertor/issues"
   },
   "keywords": [
     "electron",
@@ -97,7 +99,7 @@
     "hot",
     "reload"
   ],
-  "homepage": "https://github.com/chentsulin/electron-react-boilerplate#readme",
+  "homepage": "https://github.com/bird-ystem/bs-label-convertor",
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internals/mocks/fileMock.js",
