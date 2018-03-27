@@ -1,16 +1,17 @@
-// @flow
+/* eslint flowtype-errors/show-errors: 0 */
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Switch, Route } from 'react-router';
 import App from './containers/App';
 import HomePage from './containers/HomePage';
 import CounterPage from './containers/CounterPage';
 import ScanPage from './containers/ScanPage';
 
-
-export default (
-  <Route path="/" component={App}>
-    <IndexRoute component={HomePage} />
-    <Route path="/counter" component={CounterPage} />
-    <Route path="/scan" component={ScanPage} />
-  </Route>
+export default () => (
+  <App>
+    <Switch>
+      <Route path="/counter" component={CounterPage} />
+      <Route path="/scan" component={ScanPage} />
+      <Route path="/" component={HomePage} />
+    </Switch>
+  </App>
 );

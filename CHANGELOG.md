@@ -1,3 +1,108 @@
+# 0.13.2 (2018.1.31)
+- Hot Module Reload (HMR) fixes
+- Bumped all dependencies to latest semver
+- Prevent error propagation of `CheckNativeDeps` script
+
+# 0.13.1 (2018.1.13)
+- Hot Module Reload (HMR) fixes
+- Bumped all dependencies to latest semver
+- Fixed electron-rebuild script
+- Fixed tests scripts to run on all platforms
+- Skip redux logs in console in test ENV
+
+# 0.13.0 (2018.1.6)
+
+#### Additions
+- Add native dependencies check on postinstall
+- Updated all dependencies to latest semver
+
+# 0.12.0 (2017.7.8)
+
+#### Misc
+- Removed `babel-polyfill`
+- Renamed and alphabetized npm scripts
+
+#### Breaking
+- Changed node dev `__dirname` and `__filename` to node built in fn's (https://github.com/chentsulin/electron-react-boilerplate/pull/1035)
+- Renamed `app/bundle.js` to `app/renderer.prod.js` for consistency
+- Renamed `dll/vendor.js` to `dll/renderer.dev.dll.js` for consistency
+
+#### Additions
+- Enable node_modules cache on CI
+
+# 0.11.2 (2017.5.1)
+
+Yay! Another patch release. This release mostly includes refactorings and router bug fixes. Huge thanks to @anthonyraymond!
+
+⚠️ Windows electron builds are failing because of [this issue](https://github.com/electron/electron/issues/9321). This is not an issue with the boilerplate ⚠️
+
+#### Breaking
+- **Renamed `./app/main.development.js` => `./app/main.{dev,prod}.js`:** [#963](https://github.com/chentsulin/electron-react-boilerplate/pull/963)
+
+#### Fixes
+- **Fixed reloading when not on `/` path:** [#958](https://github.com/chentsulin/electron-react-boilerplate/pull/958) [#949](https://github.com/chentsulin/electron-react-boilerplate/pull/949)
+
+#### Additions
+- **Added support for stylefmt:** [#960](https://github.com/chentsulin/electron-react-boilerplate/pull/960)
+
+# 0.11.1 (2017.4.23)
+
+You can now debug the production build with devtools like so:
+```
+DEBUG_PROD=true npm run package
+```
+
+🎉🎉🎉
+
+#### Additions
+- **Added support for debugging production build:** [#fab245a](https://github.com/chentsulin/electron-react-boilerplate/pull/941/commits/fab245a077d02a09630f74270806c0c534a4ff95)
+
+#### Bug Fixes
+- **Fixed bug related to importing native dependencies:** [#933](https://github.com/chentsulin/electron-react-boilerplate/pull/933)
+
+#### Improvements
+- **Updated all deps to latest semver**
+
+# 0.11.0 (2017.4.19)
+
+Here's the most notable changes since `v0.10.0`. Its been about a year since a release has been pushed. Expect a new release to be published every 3-4 weeks.
+
+#### Breaking Changes
+
+- **Dropped support for node < 6**
+- **Refactored webpack config files**
+- **Migrate to two-package.json project structure**
+- **Updated all devDeps to latest semver**
+- **Migrated to Jest:** [#768](https://github.com/chentsulin/electron-react-boilerplate/pull/768)
+- **Migrated to `react-router@4`**
+- **Migrated to `electron-builder@4`**
+- **Migrated to `webpack@2`**
+- **Migrated to `react-hot-loader@3`**
+- **Changed default live reload server PORT to `1212` from `3000`**
+
+#### Additions
+
+- **Added support for Yarn:** [#451](https://github.com/chentsulin/electron-react-boilerplate/pull/451)
+- **Added support for Flow:** [#425](https://github.com/chentsulin/electron-react-boilerplate/pull/425)
+- **Added support for stylelint:** [#911](https://github.com/chentsulin/electron-react-boilerplate/pull/911)
+- **Added support for electron-builder:** [#876](https://github.com/chentsulin/electron-react-boilerplate/pull/876)
+- **Added optional support for SASS:** [#880](https://github.com/chentsulin/electron-react-boilerplate/pull/880)
+- **Added support for eslint-plugin-flowtype:** [#911](https://github.com/chentsulin/electron-react-boilerplate/pull/911)
+- **Added support for appveyor:** [#280](https://github.com/chentsulin/electron-react-boilerplate/pull/280)
+- **Added support for webpack dlls:** [#860](https://github.com/chentsulin/electron-react-boilerplate/pull/860)
+- **Route based code splitting:** [#884](https://github.com/chentsulin/electron-react-boilerplate/pull/884)
+- **Added support for Webpack Bundle Analyzer:** [#922](https://github.com/chentsulin/electron-react-boilerplate/pull/922)
+
+#### Improvements
+
+- **Parallelize renderer and main build processes when running `npm run build`**
+- **Dynamically generate electron app menu**
+- **Improved vscode integration:** [#856](https://github.com/chentsulin/electron-react-boilerplate/pull/856)
+
+#### Bug Fixes
+
+- **Fixed hot module replacement race condition bug:** [#917](https://github.com/chentsulin/electron-react-boilerplate/pull/917) [#920](https://github.com/chentsulin/electron-react-boilerplate/pull/920)
+
 # 0.10.0 (2016.4.18)
 
 #### Improvements
