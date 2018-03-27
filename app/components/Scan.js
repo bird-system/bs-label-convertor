@@ -84,7 +84,9 @@ export default class Scan extends Component {
       jsbarcode-height="40"
       jsbarcode-fontSize="16"
     ></svg>
-      ${record.additionalOutput}
+      <div class="additional-content">
+        ${record.additionalOutput}
+      </div>
     </div>`);
 
     fs.writeFileSync(
