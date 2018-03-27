@@ -168,7 +168,7 @@ export default class Scan extends Component {
           </Col>
         </Row>
         <Row>
-          <Form inline className={styles.form}>
+          <Form layout="inline" className={styles.form}>
             <Form.Item>
               <Input
                 placeholder="Input SKU"
