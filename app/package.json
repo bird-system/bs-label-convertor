@@ -16,6 +16,8 @@
   "license": "MIT",
   "dependencies": {
     "antd": "^3.3.3",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "xlsx": "^0.8.6",
     "csv-parse": "^1.2.0",
     "underscore": "^1.8.3"
