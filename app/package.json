@@ -15,7 +15,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "antd": "^3.3.3",
+    "antd": "^3.3.3"
+  },
+  "devDependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "xlsx": "^0.8.6",

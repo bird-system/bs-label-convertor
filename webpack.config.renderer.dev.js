@@ -192,7 +192,12 @@ export default merge.smart(baseConfig, {
       {
         test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/,
         use: 'url-loader',
-      }
+      },
+      {
+        test: /\.html$/,
+        exclude: /node_modules/,
+        use: { loader: 'html-loader' },
+      },
     ]
   },
 

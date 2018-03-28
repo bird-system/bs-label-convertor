@@ -5,6 +5,7 @@ import Electron from 'electron';
 import _ from 'underscore';
 import fs from 'fs';
 import path from 'path';
+import barcodeTemplate from '../templates/barcode.html';
 // import ioBarcode from 'io-barcode';
 
 import Parser from '../lib/Parser/CSV';
@@ -64,7 +65,9 @@ export default class Scan extends Component {
     console.log(record);
     console.log(win);
 
-    const compiled = _.template(fs.readFileSync(path.join(__dirname, '/templates/barcode.html'), { encoding: 'utf8' }));
+    // console.log(barcodeTemplate);
+    // const compiled = _.template(fs.readFileSync(path.join(__dirname, '/templates/barcode.html'), { encoding: 'utf8' }));
+    const compiled = _.template(barcodeTemplate);
     const tempPath = Electron.remote.app.getPath('temp');
     const tempFilePath = path.join(tempPath, '/label-print.html');
     const tempFileLocation = `file://${tempFilePath}`;
@@ -89,10 +92,6 @@ export default class Scan extends Component {
       </div>
     </div>`);
 
-    fs.writeFileSync(
-      path.join(tempPath, '/JsBarcode.all.min.js'),
-      fs.readFileSync(path.join(__dirname, './JsBarcode.all.min.js'))
-    );
     fs.writeFileSync(
       tempFilePath,
       compiled({ barcodes: html.join('') })
