@@ -81,11 +81,13 @@ export default class Scan extends Component {
     html.push(`<div class="printBlock"><svg class="barcode"
       jsbarcode-format="CODE128"
       jsbarcode-value="${record.outputSku}"
-      jsbarcode-textmargin="0"
+      jsbarcode-textMargin="0"
       jsbarcode-fontoptions="bold"
       jsbarcode-width="1"
-      jsbarcode-height="40"
-      jsbarcode-fontSize="16"
+      jsbarcode-height="28"
+      jsbarcode-fontSize="14"
+      jsbarcode-marginTop="6"
+      jsbarcode-marginBottom="2"
     ></svg>
       <div class="additional-content">
         ${record.additionalOutput}
