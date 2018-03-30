@@ -86,7 +86,7 @@ export default class Scan extends Component {
       jsbarcode-width="1"
       jsbarcode-height="28"
       jsbarcode-fontSize="14"
-      jsbarcode-marginTop="6"
+      jsbarcode-marginTop="12"
       jsbarcode-marginBottom="2"
     ></svg>
       <div class="additional-content">
