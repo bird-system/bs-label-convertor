@@ -6,6 +6,7 @@ import _ from 'underscore';
 import fs from 'fs';
 import path from 'path';
 import barcodeTemplate from '../templates/barcode.html';
+import JsBarcodeText from '../templates/JsBarcode.all.min.js.html';
 // import ioBarcode from 'io-barcode';
 
 import Parser from '../lib/Parser/CSV';
@@ -94,6 +95,10 @@ export default class Scan extends Component {
       </div>
     </div>`);
 
+    fs.writeFileSync(
+      path.join(tempPath, '/JsBarcode.all.min.js'),
+      JsBarcodeText
+    );
     fs.writeFileSync(
       tempFilePath,
       compiled({ barcodes: html.join('') })
