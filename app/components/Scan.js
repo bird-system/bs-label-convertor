@@ -21,6 +21,7 @@ export default class Scan extends Component {
     super(props);
     this.state = {
       data: [],
+      printQuantityMap: {}, // inputSku -> printQuantity
       file: '',
       inputSkuFilter: '',
       showPrintWindow: false,
@@ -37,7 +38,10 @@ export default class Scan extends Component {
       if (file.substr(file.length - 3, file.length) === 'csv') {
         const parser = new Parser(file);
         data = parser.parseCSV();
-        this.setState({ data });
+        this.setState({
+          data,
+          printQuantityMap: {},
+        });
       }
     }
   }
@@ -109,7 +113,18 @@ export default class Scan extends Component {
         win.show();
         // win.webContents.openDevTools();
       }
-      win.webContents.print({ silent: this.state.directPrint });
+      win.webContents.print({ silent: this.state.directPrint }, (success) => {
+        if (!success) return;
+
+        const printQuantityMap = Object.assign({}, this.state.printQuantityMap);
+        const key = record.inputSku;
+        const num = printQuantityMap[key] || 0;
+        if (typeof num === 'number') {
+          printQuantityMap[key] = num + 1;
+        }
+
+        this.setState({ printQuantityMap });
+      });
     });
   }
 
@@ -146,23 +161,109 @@ export default class Scan extends Component {
     });
   }
 
+  plusPrintQuantity = (record = {}) => {
+    const printQuantityMap = Object.assign({}, this.state.printQuantityMap || {});
+    const key = record.inputSku;
+
+    if (key) {
+      let num = printQuantityMap[key] || 0;
+      num += 1;
+      printQuantityMap[key] = num;
+      this.setState({ printQuantityMap });
+    }
+  }
+
+  minusPrintQuantity = (record = {}) => {
+    const printQuantityMap = Object.assign({}, this.state.printQuantityMap || {});
+    const key = record.inputSku;
+
+    if (key) {
+      let num = printQuantityMap[key] || 0;
+      num -= 1;
+      if (num < 0) {
+        num = 0;
+      }
+      printQuantityMap[key] = num;
+      this.setState({ printQuantityMap });
+    }
+  }
+
+  addPrintQuantityToTableData = (data = []) => {
+    const newData = [];
+    const printQuantityMap = this.state.printQuantityMap || {};
+
+    data.forEach((item = {}) => {
+      const newItem = Object.assign({}, item);
+      newItem.printQuantity = 0;
+
+      const key = item.inputSku;
+      if (key && printQuantityMap[key]) {
+        newItem.printQuantity = printQuantityMap[key];
+      }
+
+      newData.push(newItem);
+    });
+
+    return newData;
+  }
+
   render() {
-    const columns = [{
-      title: 'Input SKU',
-      dataIndex: 'inputSku',
-      key: 'inputSku'
-    }, {
-      title: 'Output SKU',
-      dataIndex: 'outputSku',
-      key: 'outputSku'
-    },{
-      title: 'Additional content',
-      dataIndex: 'additionalOutput',
-      key: 'additionalOutput'
-    }, {
-      title: 'Print',
-      render: (text, record) => <Button onClick={() => this.print(record)}> &#128424; </Button>
-    }];
+    const columns = [
+      {
+        title: 'Input SKU',
+        dataIndex: 'inputSku',
+        key: 'inputSku'
+      },
+      {
+        title: 'Output SKU',
+        dataIndex: 'outputSku',
+        key: 'outputSku'
+      },
+      {
+        title: 'Additional content',
+        dataIndex: 'additionalOutput',
+        key: 'additionalOutput'
+      },
+      {
+        title: 'Print QTY',
+        dataIndex: 'printQuantity',
+        key: 'printQuantity'
+      },
+      {
+        title: 'Action',
+        render: (text, record) => {
+          return (
+            <span>
+              <Button
+                icon="plus"
+                onClick={() => this.plusPrintQuantity(record)}
+              />
+
+              <Button
+                icon="minus"
+                style={{ marginLeft: 10 }}
+                onClick={() => this.minusPrintQuantity(record)}
+              />
+            </span>
+          );
+        }
+      },
+      {
+        title: 'Print',
+        render: (text, record) => {
+          return (
+            <span>
+              <Button
+                icon="printer"
+                onClick={() => this.print(record)}
+              />
+            </span>
+          );
+        }
+      },
+    ];
+
+    const tableData = this.addPrintQuantityToTableData(this.state.data);
 
     return (
       <div>
@@ -208,7 +309,7 @@ export default class Scan extends Component {
         <Row>
           <Table
             columns={columns}
-            dataSource={this.state.data}
+            dataSource={tableData}
             className={styles.container}
             rowKey="inputSku"
           />
