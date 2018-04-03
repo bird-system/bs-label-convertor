@@ -207,6 +207,48 @@ export default class Scan extends Component {
     return newData;
   }
 
+  downloadCSV = (csv, filename) => {
+    // CSV file
+    const csvFile = new Blob([csv], { type: 'text/csv' });
+
+    // Download link
+    const downloadLink = document.createElement('a');
+
+    // File name
+    downloadLink.download = filename;
+
+    // Create a link to the file
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+    // Hide download link
+    downloadLink.style.display = 'none';
+
+    // Add the link to DOM
+    document.body.appendChild(downloadLink);
+
+    // Click download link
+    downloadLink.click();
+  }
+
+  exportTableToCSV = (filename) => {
+    const csv = [];
+    const rows = document.querySelectorAll('table tr');
+
+    for (let i = 0; i < rows.length; i += 1) {
+      const row = [];
+      const cols = rows[i].querySelectorAll('td, th');
+
+      for (let j = 0; j < cols.length; j += 1) {
+        row.push(cols[j].innerText);
+      }
+
+      csv.push(row.join(','));
+    }
+
+    // Download CSV file
+    this.downloadCSV(csv.join('\n'), filename);
+  }
+
   render() {
     const columns = [
       {
@@ -300,6 +342,16 @@ export default class Scan extends Component {
                   onChange={this.directPrintSwitchOnChange}
                 />
               </span>
+            </Form.Item>
+            <Form.Item>
+              <Button
+                icon="export"
+                onClick={() => {
+                  this.exportTableToCSV('barcodes.csv');
+                }}
+              >
+                Export
+              </Button>
             </Form.Item>
             {/* <Form.Item>
               <Button onClick={this.test}> Test </Button>
