@@ -364,6 +364,11 @@ export default class Scan extends Component {
             dataSource={tableData}
             className={styles.container}
             rowKey="inputSku"
+            pagination={{
+              defaultPageSize: 500,
+              showQuickJumper: true,
+              showTotal: (paginationTotal, range) => `${range[0]}-${range[1]} of ${paginationTotal} items`,
+            }}
           />
         </Row>
       </div>
